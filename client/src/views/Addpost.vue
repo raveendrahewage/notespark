@@ -44,6 +44,7 @@ export default {
             formData.append('title',this.note.title);
             formData.append('category',this.note.category);
             formData.append('content',this.note.content);
+            formData.append('archived',false);
             if(this.$refs.form.validate()){
                 const response = await API.addNote(formData);
                 this.$router.push({name:'home', params:{message:response.message}});

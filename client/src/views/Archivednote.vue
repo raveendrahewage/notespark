@@ -10,7 +10,7 @@
                                 <v-btn small outlined color="primary">{{note.category}}</v-btn>
                             </v-col>
                             <v-col sm=10 class="d-flex justify-end">
-                                <v-btn color="success" text :to="{name:'edit-note',params:{id:note._id}}">Edit</v-btn>              
+                                <v-btn color="success" text :to="{name:'edit-archived-note',params:{id:note._id}}">Edit</v-btn>              
                                 <v-btn color="red" text dark @click.stop="dialog = true">Delete</v-btn>             
                             </v-col>
                         </v-row>
@@ -51,13 +51,13 @@ export default{
         }
     },
     async created(){
-        const response = await API.getNoteById(this.$route.params.id);
+        const response = await API.getArchivedNoteById(this.$route.params.id);
         this.note=response;
     },
     methods:{
         async deleteNote(id){
             const response = await API.deleteNote(id);
-            this.$router.push({name:'home', params:{message:response.message}});
+            this.$router.push({name:'archived', params:{message:response.message}});
         }
     }
 }

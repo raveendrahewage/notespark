@@ -82,7 +82,8 @@ import GoogleLogin from 'vue-google-login';
         items: [
           { title: 'Home', icon: 'mdi-home', link:"/notes" },
           { title: 'Add Post', icon: 'mdi-note-plus', link:"/add-note" },
-          { title: 'About', icon: 'mdi-help-box', link:"/about" },
+          { title: 'Archive', icon: 'mdi-archive', link:"/archived" },
+          { title: 'Archive', icon: 'mdi-logout', link:"/archived" },
         ]
       }
     },
@@ -99,3 +100,7 @@ import GoogleLogin from 'vue-google-login';
     }
   }
 </script>
+
+<style scoped>
+@import url("https://pro.fontawesome.com/releases/v5.10.0/css/all.css");
+</style>

@@ -35,7 +35,7 @@ export default {
         }
     },
     async created(){
-        const response = await API.getNoteById(this.$route.params.id);
+        const response = await API.getArchivedNoteById(this.$route.params.id);
         this.note=response;
     },
     methods:{
@@ -50,10 +50,10 @@ export default {
             formData.append('category',this.note.category);
             formData.append('content',this.note.content);
             formData.append('old_image',this.note.image);
-            formData.append('archived',false);
+            formData.append('archived',true);
             if(this.$refs.form.validate()){
-                const response = await API.updateNote(this.$route.params.id,formData);
-                this.$router.push({name:'home',params:{message:response.message}});
+                const response = await API.updateArchivedNote(this.$route.params.id,formData);
+                this.$router.push({name:'archived',params:{message:response.message}});
             }
         }
     }

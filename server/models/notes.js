@@ -6,6 +6,7 @@ const noteSchema = mongoose.Schema({
     content: String,
     image: String,
     email: String,
+    archived: Boolean,
     created: {
         type: Date,
         default: Date.now
