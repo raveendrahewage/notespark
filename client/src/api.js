@@ -6,6 +6,10 @@ export default class API {
         const res = await axios.get(url + '/' + email);
         return res.data;
     }
+    static async getAllPinedNotes(email) {
+        const res = await axios.get(url + '/pined/' + email);
+        return res.data;
+    }
     static async getArchivedNotes(email) {
         const res = await axios.get(url + '/archived/' + email);
         return res.data;
@@ -32,6 +36,14 @@ export default class API {
     }
     static async archiveNote(id) {
         const res = await axios.patch(url + "/archive/" + id);
+        return res.data;
+    }
+    static async pinNote(id) {
+        const res = await axios.patch(url + "/pin/" + id);
+        return res.data;
+    }
+    static async unpinNote(id) {
+        const res = await axios.patch(url + "/unpin/" + id);
         return res.data;
     }
     static async unarchiveNote(id) {

@@ -5,7 +5,16 @@ module.exports = class API {
     static async fetchAllNotes(req, res) {
         const email = req.params.email;
         try {
-            const notes = await Note.find({ email: email, archived: false });
+            const notes = await Note.find({ email: email, archived: false, pined: false });
+            res.status(200).json(notes);
+        } catch (err) {
+            res.status(404).json({ message: err.message });
+        }
+    }
+    static async fetchAllPinedNotes(req, res) {
+        const email = req.params.email;
+        try {
+            const notes = await Note.find({ email: email, archived: false, pined: true });
             res.status(200).json(notes);
         } catch (err) {
             res.status(404).json({ message: err.message });
@@ -113,11 +122,30 @@ module.exports = class API {
         }
     }
 
+    static async pinNote(req, res) {
+        const id = req.params.id;
+        try {
+            await Note.findByIdAndUpdate(id, { pined: true });
+            res.status(200).json({ message: 'Note pinned!' });
+        } catch (err) {
+            res.status(404).json({ message: err.message });
+        }
+    }
+
     static async unarchiveNote(req, res) {
         const id = req.params.id;
         try {
             await Note.findByIdAndUpdate(id, { archived: false });
             res.status(200).json({ message: 'Note unarchived!' });
+        } catch (err) {
+            res.status(404).json({ message: err.message });
+        }
+    }
+    static async unpinNote(req, res) {
+        const id = req.params.id;
+        try {
+            await Note.findByIdAndUpdate(id, { pined: false });
+            res.status(200).json({ message: 'Note unpinned!' });
         } catch (err) {
             res.status(404).json({ message: err.message });
         }

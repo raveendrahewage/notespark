@@ -18,14 +18,17 @@ let upload = multer({
 }).single('image');
 
 router.get('/:email', API.fetchAllNotes);
+router.get('/pined/:email', API.fetchAllPinedNotes);
 router.get('/archived/:email', API.fetchArchivedNotes);
 router.get('/edit/:id', API.fetchNoteById);
 router.get('/edit-archived/:id', API.fetchArchivedNoteById);
 router.post('/', upload, API.createNote);
 router.patch('/:id', upload, API.updateNote);
 router.patch('/update-archived/:id', upload, API.updateArchivedNote);
-router.patch('/archive/:id', upload, API.archiveNote);
-router.patch('/unarchive/:id', upload, API.unarchiveNote);
+router.patch('/archive/:id', API.archiveNote);
+router.patch('/pin/:id', API.pinNote);
+router.patch('/unarchive/:id', API.unarchiveNote);
+router.patch('/unpin/:id', API.unpinNote);
 router.delete('/:id', API.deleteNote);
 
 module.exports = router;

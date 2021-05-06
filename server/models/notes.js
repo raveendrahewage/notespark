@@ -7,6 +7,7 @@ const noteSchema = mongoose.Schema({
     image: String,
     email: String,
     archived: Boolean,
+    pined: Boolean,
     created: {
         type: Date,
         default: Date.now

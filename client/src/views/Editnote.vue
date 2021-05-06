@@ -51,6 +51,7 @@ export default {
             formData.append('content',this.note.content);
             formData.append('old_image',this.note.image);
             formData.append('archived',false);
+            formData.append('pined',this.note.pined);
             if(this.$refs.form.validate()){
                 const response = await API.updateNote(this.$route.params.id,formData);
                 this.$router.push({name:'home',params:{message:response.message}});

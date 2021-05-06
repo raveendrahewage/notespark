@@ -22,4 +22,11 @@ mongoose.connect(process.env.DB_URI, {
 
 app.use('/api/notes', require('./routes/routes'));
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(__dirname + '/dist/'));
+    app.get('*', (req, res) => {
+        res.sendFile(__dirname + '/dist/index.html');
+    });
+}
+
 app.listen(port, () => console.log('Server Runnig at http://localhost:' + port));

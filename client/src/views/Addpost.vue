@@ -3,7 +3,7 @@
         <v-row no-gutters>
             <v-col sm="10" class="mx-auto">
                 <v-card class="pa-5">
-                    <va-card-title class="font-weight-medium">Add New Note</va-card-title>
+                    <v-card-title class="font-weight-medium">Add New Note</v-card-title>
                     <v-divider></v-divider>
                     <v-form ref="form" @submit.prevent="submitForm" class="pa-5" enctype="multipart/form-data">
                         <v-text-field v-model="note.title" label="Title" prepend-icon="mdi-note" :rules="rules"></v-text-field>
@@ -45,6 +45,7 @@ export default {
             formData.append('category',this.note.category);
             formData.append('content',this.note.content);
             formData.append('archived',false);
+            formData.append('pined',false);
             if(this.$refs.form.validate()){
                 const response = await API.addNote(formData);
                 this.$router.push({name:'home', params:{message:response.message}});
